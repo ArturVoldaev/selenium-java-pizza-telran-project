@@ -11,8 +11,17 @@ public class GenerateRandomData {
     public String generateLastName() {
         return faker.name().lastName();
     }
+    public String generateAddress() {
+        return faker.address().streetAddress();
+    }
+    public String generateCompanyName() {
+        return faker.name().username();
+    }
+    public String generateCityOfCafe() {
+        return faker.address().cityName();
+    }
     public String generateEmail() {
-        return faker.internet().emailAddress();
+        return "a"+Integer.toString(faker.number().numberBetween(1, 10000))+"@ya.com";
     }
     public String generateMobilePhone() {
         return faker.phoneNumber().cellPhone();
