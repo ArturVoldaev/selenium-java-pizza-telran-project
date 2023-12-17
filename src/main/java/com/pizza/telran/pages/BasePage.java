@@ -1,5 +1,7 @@
 package com.pizza.telran.pages;
 
+import com.pizza.telran.data.GenerateRandomData;
+import com.pizza.telran.data.PizzaTableConstant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,4 +30,29 @@ public class BasePage {
         element.sendKeys(text);
     }
 
+    public int findNumberOfColumn(String needData, List<WebElement> elements) {
+        int numberOfColumn = 0;
+        for (int i = 0; i < elements.size(); i++) {
+            WebElement element = elements.get(i);
+            if (element.getText().equals(needData)) {
+                numberOfColumn = i;
+                break;
+            }
+        }
+        return numberOfColumn;
+    }
+    public int getRowAmount( List<WebElement> rows) {
+        return rows.size();
+    }
+
+    public int generateRandomRow(int elemAmount) {
+        return PizzaTableConstant.PIZZA_NUMBER = new GenerateRandomData().generateRandomNumberInRange(1, elemAmount-1);
+    }
+
+    public String getDataFromTable(String pizzaParam, List<WebElement> row, List<WebElement> unit, int numberOfRow) {
+        WebElement element = unit.get(numberOfRow);
+        List<WebElement> children = element.findElements(By.tagName("td"));
+        //System.out.println(children.get(findNumberOfColumn(pizzaParam, row)).getText());
+        return children.get(findNumberOfColumn(pizzaParam, row)).getText();
+    }
 }

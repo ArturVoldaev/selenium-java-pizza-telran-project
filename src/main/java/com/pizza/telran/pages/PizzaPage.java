@@ -18,26 +18,8 @@ public class PizzaPage extends BasePage {
     @FindBy(tagName = "tr")
     List<WebElement> pizzaList;
 
-    @FindBy(tagName = "tbody")
-    WebElement pizzaTable;
-
     @FindBy(tagName = "th")
     List<WebElement> pizzaTableHeading;
-
-    @FindBy(xpath = "(//button[@type='submit'][normalize-space()='Cafe'])")
-    String pizzaButton;
-
-    public int findNumberOfColumn(String needData) {
-        int numberOfColumn = 0;
-        for (int i = 0; i < pizzaTableHeading.size(); i++) {
-            WebElement element = pizzaTableHeading.get(i);
-            if (element.getText().equals(needData)) {
-                numberOfColumn = i;
-                break;
-            }
-        }
-        return numberOfColumn;
-    }
 
     public String randomNumberOfPizzas() {
         return "["+ PizzaTableConstant.PIZZA_NUMBER +"]";
@@ -52,24 +34,19 @@ public class PizzaPage extends BasePage {
         clickOnElement(randomPizzaButton());
     }
 
-    public int getPizzaAmount() {
-        return pizzaList.size();
-    }
-
-    public int generatePizzaNumber() {
-        return PizzaTableConstant.PIZZA_NUMBER = new GenerateRandomData().generateRandomNumberInRange(1, getPizzaAmount());
-    }
-
-    public String getPizzaData(String pizzaParam) {
-        WebElement element = pizzaList.get(generatePizzaNumber());
-        List<WebElement> children = element.findElements(By.tagName("td"));
-        //System.out.println(children.get(findNumberOfColumn(pizzaParam)).getText());
-        return children.get(findNumberOfColumn(pizzaParam)).getText();
-    }
+//    public String getDataFromTable(String pizzaParam, List<WebElement> row, List<WebElement> unit, int numberOfRow) {
+//        WebElement element = unit.get(numberOfRow);
+//        List<WebElement> children = element.findElements(By.tagName("td"));
+//        //System.out.println(children.get(findNumberOfColumn(pizzaParam)).getText());
+//        return children.get(findNumberOfColumn(pizzaParam, row)).getText();
+//    }
 
     public PizzaPage fillGlobalData() {
-        CafeTableConstant.MY_CAFE = getPizzaData(PizzaTableConstant.PIZZA_COLUM_CAFE);
+        CafeTableConstant.MY_CAFE = getDataFromTable(
+                PizzaTableConstant.PIZZA_COLUM_CAFE,
+                pizzaTableHeading,
+                pizzaList,
+                generateRandomRow(getRowAmount(pizzaList)));
         return this;
     }
-
 }
