@@ -26,6 +26,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//button[.='Pizzas']")
     WebElement bodyPizzasButton;
 
+    @FindBy(xpath = "//button[normalize-space()='Submit']")
+    WebElement submitButton;
+
     public HomePage clickToHeaderButtonHomePage() {
         clickOnElement(headerHomeButton);
         return this;
@@ -53,4 +56,6 @@ public class HomePage extends BasePage {
     public String getTitleText() {
         return mainPageH1Title.getText();
     }
+
+
 }

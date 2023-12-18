@@ -29,4 +29,7 @@ public class GenerateRandomData {
     public Integer generateRandomNumberInRange(Integer min, Integer max) {
         return faker.number().numberBetween(min, max);
     }
+    public String generateIngredients() {
+        return faker.food().ingredient()+", "+ faker.food().ingredient()+", "+ faker.food().ingredient()+".";
+    }
 }
