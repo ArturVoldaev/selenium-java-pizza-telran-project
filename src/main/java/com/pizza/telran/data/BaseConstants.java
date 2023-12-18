@@ -1,7 +1,5 @@
 package com.pizza.telran.data;
 
-
-
 public class BaseConstants {
     public static final String BASE_URL =  "http://pizza.telran-edu.de:2222/";
     public static final String MAIN_PAGE_TITLE =  "Cafe Pizza";

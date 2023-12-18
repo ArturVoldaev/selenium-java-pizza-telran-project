@@ -10,25 +10,18 @@ public class HomePage extends BasePage {
     }
     @FindBy(xpath = "//h1[.='Cafe Pizza']")
     WebElement mainPageH1Title;
-
     @FindBy(xpath = "//a[.='Home']")
     WebElement headerHomeButton;
-
     @FindBy(xpath = "//a[.='Cafe']")
     WebElement headerCafeButton;
-
     @FindBy(css = "a[class='login']")
     WebElement headerLogInButton;
-
     @FindBy(xpath = "//button[.='Cafes']")
     WebElement bodyCafesButton;
-
     @FindBy(xpath = "//button[.='Pizzas']")
     WebElement bodyPizzasButton;
-
     @FindBy(xpath = "//button[normalize-space()='Submit']")
     WebElement submitButton;
-
     public HomePage clickToHeaderButtonHomePage() {
         clickOnElement(headerHomeButton);
         return this;
@@ -37,25 +30,19 @@ public class HomePage extends BasePage {
         clickOnElement(headerCafeButton);
         return this;
     }
-
     public HomePage clickToHeaderButtonLogInPage() {
         clickOnElement(headerLogInButton);
         return this;
     }
-
     public HomePage clickToBodyButtonCafes() {
         clickOnElement(bodyCafesButton);
         return this;
     }
-
     public HomePage clickToBodyButtonPizzas() {
         clickOnElement(bodyPizzasButton);
         return this;
     }
-
     public String getTitleText() {
-        return mainPageH1Title.getText();
+        return new BasePage(driver).getWebElementText(mainPageH1Title);
     }
-
-
 }

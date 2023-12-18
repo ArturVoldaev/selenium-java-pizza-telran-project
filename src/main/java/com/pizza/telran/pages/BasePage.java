@@ -84,7 +84,7 @@ public class BasePage {
         }
         return isCompanyInList;
     }
-    public String textElement(WebElement element) {
-        return element.getText();
+    public String getWebElementText(WebElement webElement) {
+        return webElement.getText();
     }
 }
