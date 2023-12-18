@@ -20,8 +20,6 @@ public class HomePage extends BasePage {
     WebElement bodyCafesButton;
     @FindBy(xpath = "//button[.='Pizzas']")
     WebElement bodyPizzasButton;
-    @FindBy(xpath = "//button[normalize-space()='Submit']")
-    WebElement submitButton;
     public HomePage clickToHeaderButtonHomePage() {
         clickOnElement(headerHomeButton);
         return this;

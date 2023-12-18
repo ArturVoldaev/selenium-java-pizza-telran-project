@@ -7,10 +7,10 @@ public class CafeListPage extends BasePage {
         super(driver);
     }
     public Boolean isButtonNewVisible() {
-        return new BasePage(driver).createNewButton().isDisplayed();
+        return new BasePage(driver).getCreateNewButton().isDisplayed();
     }
     public CafeListPage clickOnCreateNewCafeButton() {
-        clickOnElement(new BasePage(driver).createNewButton());
+        clickOnElement(new BasePage(driver).getCreateNewButton());
         return this;
     }
 }

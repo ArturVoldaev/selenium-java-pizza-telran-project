@@ -1,5 +1,6 @@
 package com.pizza.telran.pages;
 
+import com.pizza.telran.data.BaseConstants;
 import com.pizza.telran.data.GenerateRandomData;
 import com.pizza.telran.data.PizzaTableConstant;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +24,6 @@ public class CreateNewPizzaPage extends BasePage {
     WebElement pizzaPriceInput;
     @FindBy(xpath = "//select[@id='cafe']")
     WebElement pizzaCafeInput;
-
     public CreateNewPizzaPage createNewPizza() {
         PizzaTableConstant.PIZZA_NAME = new GenerateRandomData().generateFirstName();
         fillField(PizzaTableConstant.PIZZA_NAME, pizzaNameInput);
@@ -33,14 +33,15 @@ public class CreateNewPizzaPage extends BasePage {
         Select select = new Select(pizzaCafeInput);
         List<WebElement> selectedOptionList = select.getAllSelectedOptions();
         select.selectByIndex(new GenerateRandomData().generateRandomNumberInRange(0, selectedOptionList.size()));
-        clickOnElement(new HomePage(driver).submitButton);
+        clickSubmit();
         return this;
     }
-
     public CreateNewPizzaPage createEmptyPizza() {
-        clickOnElement(new HomePage(driver).submitButton);
+        clickSubmit();
         return this;
     }
-
-
+    public CreateNewPizzaPage editPizza() {
+        editItem(BaseConstants.EDIT_PARAM, pizzaSizeInput);
+        return this;
+    }
 }

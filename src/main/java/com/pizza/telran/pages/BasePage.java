@@ -25,17 +25,17 @@ public class BasePage {
     @FindBy(xpath = " //div[@class='error']")
     WebElement error;
     @FindBy(xpath = "//button[normalize-space()='New']")
-    WebElement createNew;
-
-    public WebElement errorElement() {
+    WebElement createNewButton;
+    @FindBy(xpath = "//button[normalize-space()='Submit']")
+    WebElement submitButton;
+    public WebElement getErrorElement() {
         return error;
     }
-
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
-    public WebElement createNewButton() {
-        return createNew;
+    public WebElement getCreateNewButton() {
+        return createNewButton;
     }
     public void clickOnElement(WebElement nameOfWebElement) {
         nameOfWebElement.click();
@@ -67,14 +67,17 @@ public class BasePage {
         List<WebElement> children = element.findElements(By.tagName("td"));
         return children.get(findNumberOfColumn(pizzaParam, row)).getText();
     }
-    public WebElement findLastButtonDelete(int numberOfElem) {
-        String xpath = "(//button[@type='submit'][normalize-space()='Delete'])["+ (numberOfElem) +"]";
+    public WebElement findLastActionButton(int numberOfElem, String buttonAction) {
+        String xpath = "(//button[@type='submit'][normalize-space()='"+buttonAction+"'])["+ (numberOfElem) +"]";
         return driver.findElement(By.xpath(xpath));
     }
-    public void deleteLastElementInTable() {
-        clickOnElement(findLastButtonDelete(rows.size() - 1));
+    public void editLastElementInTable() {
+        clickOnElement(findLastActionButton((rows.size() - 1), "Edit"));
     }
-    public Boolean isElementExist(String nameCompany) {
+    public void deleteLastElementInTable() {
+        clickOnElement(findLastActionButton((rows.size() - 1), "Delete"));
+    }
+    public Boolean isElementExistInTable(String nameCompany) {
         boolean isCompanyInList = false;
         for (WebElement webElement : ceil) {
             if (webElement.getText().equals(nameCompany)) {
@@ -86,5 +89,14 @@ public class BasePage {
     }
     public String getWebElementText(WebElement webElement) {
         return webElement.getText();
+    }
+    public BasePage clickSubmit() {
+        clickOnElement(submitButton);
+        return this;
+    }
+    public BasePage editItem(String newData, WebElement nameInput) {
+        fillField(newData, nameInput);
+        clickSubmit();
+        return this;
     }
 }

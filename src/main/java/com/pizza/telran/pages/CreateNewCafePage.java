@@ -1,7 +1,6 @@
 package com.pizza.telran.pages;
 
 import com.pizza.telran.data.BaseConstants;
-import com.pizza.telran.data.GenerateRandomData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +9,6 @@ public class CreateNewCafePage extends BasePage {
     public CreateNewCafePage(WebDriver driver) {
         super(driver);
     }
-
     @FindBy(id = "name")
     WebElement cafeNameInput;
     @FindBy(id = "city")
@@ -25,10 +23,7 @@ public class CreateNewCafePage extends BasePage {
     WebElement cafeOpenInput;
     @FindBy(id = "close")
     WebElement cafeCloseInput;
-    public String newCompanyName() {
-        return BaseConstants.NEW_COMPANY_NAME = new GenerateRandomData().generateCompanyName();
-    }
-    public void createNewCafe(
+    public CreateNewCafePage createNewCafe(
             String cafeName,
             String cafeCity,
             String cafeAddress,
@@ -44,6 +39,11 @@ public class CreateNewCafePage extends BasePage {
         fillField(cafePhone, cafePhoneInput);
         fillField(cafeOpen, cafeOpenInput);
         fillField(cafeClose, cafeCloseInput);
-        clickOnElement(new HomePage(driver).submitButton);
+        clickSubmit();
+        return this;
+    }
+    public CreateNewCafePage editCafe() {
+        editItem(BaseConstants.EDIT_PARAM, cafeCityInput);
+        return this;
     }
 }

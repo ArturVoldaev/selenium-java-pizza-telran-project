@@ -29,7 +29,7 @@ public class PizzaPage extends BasePage {
         return this;
     }
     public PizzaPage clickOnCreateNewPizza() {
-        clickOnElement(new BasePage(driver).createNewButton());
+        clickOnElement(new BasePage(driver).getCreateNewButton());
         return this;
     }
 }

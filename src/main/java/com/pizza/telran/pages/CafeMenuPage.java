@@ -7,9 +7,7 @@ public class CafeMenuPage extends BasePage {
     public CafeMenuPage(WebDriver driver) {
         super(driver);
     }
-
     public Boolean isRightCafe(String myCafe) {
         return driver.findElement(By.xpath("//p[normalize-space()='"+ myCafe +"']")).isDisplayed();
     }
-
 }

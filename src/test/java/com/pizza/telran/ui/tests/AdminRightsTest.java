@@ -19,35 +19,42 @@ public class AdminRightsTest extends BaseTest {
         new HomePage(driver).clickToHeaderButtonCafePage();
         new CafeListPage(driver).clickOnCreateNewCafeButton();
         new CreateNewCafePage(driver).createNewCafe(
-                new CreateNewCafePage(driver).newCompanyName(),
+                BaseConstants.NEW_COMPANY_NAME,
                 new GenerateRandomData().generateCityOfCafe(),
                 new GenerateRandomData().generateAddress(),
                 new GenerateRandomData().generateEmail(),
                 new GenerateRandomData().generateMobilePhone(),
                 BaseConstants.CAFE_OPEN, BaseConstants.CAFE_CLOSE);
-        Assert.assertTrue(new BasePage(driver).isElementExist(BaseConstants.NEW_COMPANY_NAME));
+        Assert.assertTrue(new BasePage(driver).isElementExistInTable(BaseConstants.NEW_COMPANY_NAME));
+    }
+    @Test
+    public void editCafe() {
+        new HomePage(driver).clickToHeaderButtonCafePage();
+        new BasePage(driver).editLastElementInTable();
+        new CreateNewCafePage(driver).editCafe();
+        Assert.assertTrue(new BasePage(driver).isElementExistInTable(BaseConstants.EDIT_PARAM));
     }
     @Test
     public void createNewCafeWithCafeLongName() {
         new HomePage(driver).clickToHeaderButtonCafePage();
         new CafeListPage(driver).clickOnCreateNewCafeButton();
         new CreateNewCafePage(driver).createNewCafe(
-                new CreateNewCafePage(driver).newCompanyName()
-                        + new CreateNewCafePage(driver).newCompanyName()
-                        + new CreateNewCafePage(driver).newCompanyName(),
+                BaseConstants.NEW_COMPANY_NAME
+                        + BaseConstants.NEW_COMPANY_NAME
+                        + BaseConstants.NEW_COMPANY_NAME,
                 new GenerateRandomData().generateCityOfCafe(),
                 new GenerateRandomData().generateAddress(),
                 new GenerateRandomData().generateEmail(),
                 new GenerateRandomData().generateMobilePhone(),
                 BaseConstants.CAFE_OPEN, BaseConstants.CAFE_CLOSE);
-        Assert.assertTrue(new BasePage(driver).errorElement().isDisplayed());
+        Assert.assertTrue(new BasePage(driver).getErrorElement().isDisplayed());
     }
     @Test
     public void createNewCafeWithCityLongName() {
         new HomePage(driver).clickToHeaderButtonCafePage();
         new CafeListPage(driver).clickOnCreateNewCafeButton();
         new CreateNewCafePage(driver).createNewCafe(
-                new CreateNewCafePage(driver).newCompanyName(),
+                BaseConstants.NEW_COMPANY_NAME,
                 new GenerateRandomData().generateCityOfCafe()
                         + new GenerateRandomData().generateCityOfCafe()
                         + new GenerateRandomData().generateCityOfCafe(),
@@ -55,32 +62,39 @@ public class AdminRightsTest extends BaseTest {
                 new GenerateRandomData().generateEmail(),
                 new GenerateRandomData().generateMobilePhone(),
                 BaseConstants.CAFE_OPEN, BaseConstants.CAFE_CLOSE);
-        Assert.assertTrue(new BasePage(driver).errorElement().isDisplayed());
+        Assert.assertTrue(new BasePage(driver).getErrorElement().isDisplayed());
     }
     @Test
     public void deleteCafe() {
         new HomePage(driver).clickToHeaderButtonCafePage();
-        new CafeListPage(driver).deleteLastElementInTable();
-        Assert.assertFalse(new BasePage(driver).isElementExist(BaseConstants.LAST_CAFE_NAME));
+        new BasePage(driver).deleteLastElementInTable();
+        Assert.assertFalse(new BasePage(driver).isElementExistInTable(BaseConstants.LAST_CAFE_NAME));
     }
     @Test
     public void createNewPizza() {
         new HomePage(driver).clickToBodyButtonPizzas();
         new PizzaPage(driver).clickOnCreateNewPizza();
         new CreateNewPizzaPage(driver).createNewPizza();
-        Assert.assertTrue(new BasePage(driver).isElementExist(PizzaTableConstant.PIZZA_NAME));
+        Assert.assertTrue(new BasePage(driver).isElementExistInTable(PizzaTableConstant.PIZZA_NAME));
+    }
+    @Test
+    public void editPizza() {
+        new HomePage(driver).clickToBodyButtonPizzas();
+        new BasePage(driver).editLastElementInTable();
+        new CreateNewPizzaPage(driver).editPizza();
+        Assert.assertTrue(new BasePage(driver).isElementExistInTable(BaseConstants.EDIT_PARAM));
     }
     @Test
     public void deletePizza() {
         new HomePage(driver).clickToBodyButtonPizzas();
-        new CafeListPage(driver).deleteLastElementInTable();
-        Assert.assertFalse(new BasePage(driver).isElementExist(PizzaTableConstant.PIZZA_NAME));
+        new BasePage(driver).deleteLastElementInTable();
+        Assert.assertFalse(new BasePage(driver).isElementExistInTable(PizzaTableConstant.PIZZA_NAME));
     }
     @Test
     public void createEmptyPizza() {
         new HomePage(driver).clickToBodyButtonPizzas();
         new PizzaPage(driver).clickOnCreateNewPizza();
         new CreateNewPizzaPage(driver).createEmptyPizza();
-        Assert.assertTrue(new BasePage(driver).errorElement().isDisplayed());
+        Assert.assertTrue(new BasePage(driver).getErrorElement().isDisplayed());
     }
 }
