@@ -11,7 +11,7 @@ public class GenerateRandomData {
         return faker.name().lastName();
     }
     public String generateAddress() { return faker.address().streetAddress();}
-    public String generateCompanyName() { return faker.name().username();}
+    public String generateCompanyName() { return faker.artist().name();}
     public String generateCityOfCafe() {
         return faker.address().cityName();
     }

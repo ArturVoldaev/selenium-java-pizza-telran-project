@@ -45,6 +45,9 @@ public class AdminRightsTest extends BaseTest {
         new CreateNewCafePage(driver).createNewCafe(
                 new CreateNewCafePage(driver).newCafeName()
                         + new CreateNewCafePage(driver).newCafeName()
+                        + new CreateNewCafePage(driver).newCafeName()
+                        + new CreateNewCafePage(driver).newCafeName()
+                        + new CreateNewCafePage(driver).newCafeName()
                         + new CreateNewCafePage(driver).newCafeName(),
                 new GenerateRandomData().generateCityOfCafe(),
                 new GenerateRandomData().generateAddress(),
@@ -60,6 +63,9 @@ public class AdminRightsTest extends BaseTest {
         new CreateNewCafePage(driver).createNewCafe(
                 new CreateNewCafePage(driver).newCafeName(),
                 new GenerateRandomData().generateCityOfCafe()
+                        + new GenerateRandomData().generateCityOfCafe()
+                        + new GenerateRandomData().generateCityOfCafe()
+                        + new GenerateRandomData().generateCityOfCafe()
                         + new GenerateRandomData().generateCityOfCafe()
                         + new GenerateRandomData().generateCityOfCafe(),
                 new GenerateRandomData().generateAddress(),
