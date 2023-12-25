@@ -1,14 +1,16 @@
 package com.pizza.telran.pages;
 
 import com.pizza.telran.data.GenerateRandomData;
-import com.pizza.telran.data.PizzaTableConstant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BasePage {
     public WebDriver driver;
@@ -16,8 +18,6 @@ public class BasePage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-    @FindBy(tagName = "th")
-    List<WebElement> tableHeading;
     @FindBy(tagName = "tr")
     List<WebElement> rows;
     @FindBy(tagName = "td")
@@ -45,37 +45,16 @@ public class BasePage {
         element.clear();
         element.sendKeys(text);
     }
-    public int findNumberOfColumn(String needData, List<WebElement> elements) {
-        int numberOfColumn = 0;
-        for (int i = 0; i < elements.size(); i++) {
-            WebElement element = elements.get(i);
-            if (element.getText().equals(needData)) {
-                numberOfColumn = i;
-                break;
-            }
-        }
-        return numberOfColumn;
-    }
-    public int getRowAmount( List<WebElement> rows) {
-        return rows.size();
-    }
-    public int generateRandomRow(int elemAmount) {
-        return PizzaTableConstant.PIZZA_NUMBER = new GenerateRandomData().generateRandomNumberInRange(1, elemAmount-1);
-    }
-    public String getDataFromTable(String pizzaParam, List<WebElement> row, List<WebElement> unit, int numberOfRow) {
-        WebElement element = unit.get(numberOfRow);
-        List<WebElement> children = element.findElements(By.tagName("td"));
-        return children.get(findNumberOfColumn(pizzaParam, row)).getText();
-    }
-    public WebElement findLastActionButton(int numberOfElem, String buttonAction) {
+    public WebElement findActionButton(int numberOfElem, String buttonAction) {
         String xpath = "(//button[@type='submit'][normalize-space()='"+buttonAction+"'])["+ (numberOfElem) +"]";
         return driver.findElement(By.xpath(xpath));
     }
     public void editLastElementInTable() {
-        clickOnElement(findLastActionButton((rows.size() - 1), "Edit"));
+        clickOnElement(findActionButton((rows.size() - 1), "Edit"));
     }
-    public void deleteLastElementInTable() {
-        clickOnElement(findLastActionButton((rows.size() - 1), "Delete"));
+    public void deleteElementInTable() {
+        int randomButton = new GenerateRandomData().generateRandomNumberInRange(1, parseTable().size());
+        clickOnElement(findActionButton(randomButton, "Delete"));
     }
     public Boolean isElementExistInTable(String nameCompany) {
         boolean isCompanyInList = false;
@@ -98,5 +77,38 @@ public class BasePage {
         fillField(newData, nameInput);
         clickSubmit();
         return this;
+    }
+    public List<Map<String, String>> parseTable() {
+        List<Map<String, String>> tableDataList = new ArrayList<>();
+
+        WebElement table = driver.findElement(By.xpath("(//table)[1]"));
+        List<WebElement> rows = table.findElements(By.tagName("tr"));
+        List<WebElement> headers = rows.get(0).findElements(By.tagName("th"));
+
+        for (int i = 1; i < rows.size(); i++) {
+            List<WebElement> cells = rows.get(i).findElements(By.tagName("td"));
+            Map<String, String> tableData = new HashMap<>();
+            for (int j = 0; j < headers.size(); j++) {
+                String header = headers.get(j).getText();
+                String cellValue = cells.get(j).getText();
+                if (headers.get(j).getText().equals("Pic")) {
+                    tableData.put(header, getPizzaSrc(i));
+                    continue;
+                }
+                tableData.put(header, cellValue);
+            }
+            tableDataList.add(tableData);
+        }
+        return tableDataList;
+    }
+    public String getPizzaSrc(int iterator) {
+        WebElement img = driver.findElement(By.xpath("(//img)"+"["+ iterator +"]"));
+        return img.getAttribute("src");
+    }
+    public boolean checkParseData (List<Map<String, String>> hashMapA, List<Map<String, String>> hashMapB) {
+        return hashMapA.equals(hashMapB);
+    }
+    public int generateRandomNumberOfActionButton() {
+        return new GenerateRandomData().generateRandomNumberInRange(1, parseTable().size());
     }
 }

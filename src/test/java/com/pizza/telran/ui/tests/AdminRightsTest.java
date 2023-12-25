@@ -2,11 +2,14 @@ package com.pizza.telran.ui.tests;
 
 import com.pizza.telran.data.BaseConstants;
 import com.pizza.telran.data.GenerateRandomData;
-import com.pizza.telran.data.PizzaTableConstant;
 import com.pizza.telran.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
+import java.util.Map;
+
 
 public class AdminRightsTest extends BaseTest {
     @BeforeMethod
@@ -16,16 +19,17 @@ public class AdminRightsTest extends BaseTest {
     }
     @Test
     public void createNewCafe() {
+        String newCafeName = new CreateNewCafePage(driver).newCafeName();
         new HomePage(driver).clickToHeaderButtonCafePage();
-        new CafeListPage(driver).clickOnCreateNewCafeButton();
+        new CafePage(driver).clickOnCreateNewCafeButton();
         new CreateNewCafePage(driver).createNewCafe(
-                BaseConstants.NEW_COMPANY_NAME,
+                newCafeName,
                 new GenerateRandomData().generateCityOfCafe(),
                 new GenerateRandomData().generateAddress(),
                 new GenerateRandomData().generateEmail(),
                 new GenerateRandomData().generateMobilePhone(),
                 BaseConstants.CAFE_OPEN, BaseConstants.CAFE_CLOSE);
-        Assert.assertTrue(new BasePage(driver).isElementExistInTable(BaseConstants.NEW_COMPANY_NAME));
+        Assert.assertTrue(new BasePage(driver).isElementExistInTable(newCafeName));
     }
     @Test
     public void editCafe() {
@@ -37,11 +41,11 @@ public class AdminRightsTest extends BaseTest {
     @Test
     public void createNewCafeWithCafeLongName() {
         new HomePage(driver).clickToHeaderButtonCafePage();
-        new CafeListPage(driver).clickOnCreateNewCafeButton();
+        new CafePage(driver).clickOnCreateNewCafeButton();
         new CreateNewCafePage(driver).createNewCafe(
-                BaseConstants.NEW_COMPANY_NAME
-                        + BaseConstants.NEW_COMPANY_NAME
-                        + BaseConstants.NEW_COMPANY_NAME,
+                new CreateNewCafePage(driver).newCafeName()
+                        + new CreateNewCafePage(driver).newCafeName()
+                        + new CreateNewCafePage(driver).newCafeName(),
                 new GenerateRandomData().generateCityOfCafe(),
                 new GenerateRandomData().generateAddress(),
                 new GenerateRandomData().generateEmail(),
@@ -52,9 +56,9 @@ public class AdminRightsTest extends BaseTest {
     @Test
     public void createNewCafeWithCityLongName() {
         new HomePage(driver).clickToHeaderButtonCafePage();
-        new CafeListPage(driver).clickOnCreateNewCafeButton();
+        new CafePage(driver).clickOnCreateNewCafeButton();
         new CreateNewCafePage(driver).createNewCafe(
-                BaseConstants.NEW_COMPANY_NAME,
+                new CreateNewCafePage(driver).newCafeName(),
                 new GenerateRandomData().generateCityOfCafe()
                         + new GenerateRandomData().generateCityOfCafe()
                         + new GenerateRandomData().generateCityOfCafe(),
@@ -67,15 +71,23 @@ public class AdminRightsTest extends BaseTest {
     @Test
     public void deleteCafe() {
         new HomePage(driver).clickToHeaderButtonCafePage();
-        new BasePage(driver).deleteLastElementInTable();
-        Assert.assertFalse(new BasePage(driver).isElementExistInTable(BaseConstants.LAST_CAFE_NAME));
+        List<Map<String, String>> beforeDelete = new BasePage(driver).parseTable();
+        new BasePage(driver).deleteElementInTable();
+        List<Map<String, String>> afterDelete = new BasePage(driver).parseTable();
+        Assert.assertFalse(new BasePage(driver).checkParseData(beforeDelete, afterDelete));
     }
     @Test
     public void createNewPizza() {
         new HomePage(driver).clickToBodyButtonPizzas();
         new PizzaPage(driver).clickOnCreateNewPizza();
-        new CreateNewPizzaPage(driver).createNewPizza();
-        Assert.assertTrue(new BasePage(driver).isElementExistInTable(PizzaTableConstant.PIZZA_NAME));
+        String newNamePizza = new CreateNewPizzaPage(driver).pizzaName();
+        new CreateNewPizzaPage(driver).createNewPizza(
+                newNamePizza,
+                "Family",
+                new GenerateRandomData().generateIngredients(),
+                new CreateNewPizzaPage(driver).pizzaPrice()
+        );
+        Assert.assertTrue(new BasePage(driver).isElementExistInTable(newNamePizza));
     }
     @Test
     public void editPizza() {
@@ -87,8 +99,10 @@ public class AdminRightsTest extends BaseTest {
     @Test
     public void deletePizza() {
         new HomePage(driver).clickToBodyButtonPizzas();
-        new BasePage(driver).deleteLastElementInTable();
-        Assert.assertFalse(new BasePage(driver).isElementExistInTable(PizzaTableConstant.PIZZA_NAME));
+        List<Map<String, String>> beforeDelete = new BasePage(driver).parseTable();
+        new BasePage(driver).deleteElementInTable();
+        List<Map<String, String>> afterDelete = new BasePage(driver).parseTable();
+        Assert.assertFalse(new BasePage(driver).checkParseData(beforeDelete, afterDelete));
     }
     @Test
     public void createEmptyPizza() {

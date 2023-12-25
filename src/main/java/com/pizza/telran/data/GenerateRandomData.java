@@ -25,6 +25,6 @@ public class GenerateRandomData {
         return faker.number().numberBetween(min, max);
     }
     public String generateIngredients() {
-        return faker.food().ingredient()+", "+ faker.food().ingredient()+", "+ faker.food().ingredient()+".";
+        return faker.food().ingredient()+", "+ faker.food().ingredient()+ ".";
     }
 }

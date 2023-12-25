@@ -1,6 +1,7 @@
 package com.pizza.telran.pages;
 
 import com.pizza.telran.data.BaseConstants;
+import com.pizza.telran.data.GenerateRandomData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -45,5 +46,8 @@ public class CreateNewCafePage extends BasePage {
     public CreateNewCafePage editCafe() {
         editItem(BaseConstants.EDIT_PARAM, cafeCityInput);
         return this;
+    }
+    public String newCafeName() {
+        return new GenerateRandomData().generateCompanyName();
     }
 }

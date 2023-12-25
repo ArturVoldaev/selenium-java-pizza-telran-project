@@ -9,7 +9,6 @@ public class LogInPage extends BasePage {
     public LogInPage(WebDriver driver) {
         super(driver);
     }
-
     @FindBy(xpath = "//div[@class='login_title']")
     WebElement logInPageTitle;
 

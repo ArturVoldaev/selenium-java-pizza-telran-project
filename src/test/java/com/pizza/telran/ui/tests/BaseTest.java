@@ -22,8 +22,9 @@ public class BaseTest {
     EventFiringWebDriver driver;
         @BeforeMethod
         public void setUp() {
-            FirefoxOptions options = new FirefoxOptions();
-            driver = new EventFiringWebDriver(new FirefoxDriver(options.addArguments("--headless")));
+            //FirefoxOptions options = new FirefoxOptions();
+            //options.addArguments("--headless")
+            driver = new EventFiringWebDriver(new FirefoxDriver());
             driver.get(BaseConstants.BASE_URL);
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -37,6 +38,6 @@ public class BaseTest {
                 FileUtils.copyFile(scrFile, new File("screenshot\\" + testResult.getName() + "-"
                         + System.currentTimeMillis() / 1000 + ".jpg"));
             }
-        driver.quit();
+        //driver.quit();
     }
 }

@@ -11,6 +11,4 @@ public class BaseConstants {
     public static final String CAFE_OPEN =  "9:00";
     public static final String CAFE_CLOSE =  "21:00";
     public static final String EDIT_PARAM =  "My edit";
-    public static String LAST_CAFE_NAME =  "";
-    public static String NEW_COMPANY_NAME =  new GenerateRandomData().generateCompanyName();
 }
