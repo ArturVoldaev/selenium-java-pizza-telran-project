@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreateNewPizzaPage extends BasePage {
@@ -41,6 +42,10 @@ public class CreateNewPizzaPage extends BasePage {
     public CreateNewPizzaPage editPizza() {
         editItem(BaseConstants.EDIT_PARAM, pizzaSizeInput);
         return this;
+    }
+    public String pizzaSize() {
+        ArrayList <String> pizzaSize = new ArrayList<String>(List.of(new String[]{"Family", "Party", "XXL"}));
+        return pizzaSize.get(new GenerateRandomData().generateRandomNumberInRange(0, pizzaSize.size()));
     }
     public String pizzaName() {
         return new GenerateRandomData().generateFirstName();

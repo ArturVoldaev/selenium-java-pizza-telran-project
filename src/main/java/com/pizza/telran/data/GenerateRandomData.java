@@ -7,9 +7,6 @@ public class GenerateRandomData {
     public String generateFirstName() {
         return faker.name().firstName();
     }
-    public String generateLastName() {
-        return faker.name().lastName();
-    }
     public String generateAddress() { return faker.address().streetAddress();}
     public String generateCompanyName() { return faker.artist().name();}
     public String generateCityOfCafe() {
