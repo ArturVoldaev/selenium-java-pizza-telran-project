@@ -17,7 +17,7 @@ public class AdminRightsTest extends BaseTest {
         new HomePage(driver).clickToHeaderButtonLogInPage();
         new LogInPage(driver).logInWithBaseAdminAccess();
     }
-    @Test
+    @Test(invocationCount = 5, priority = 1)
     public void createNewCafe() {
         String newCafeName = new CreateNewCafePage(driver).newCafeName();
         new HomePage(driver).clickToHeaderButtonCafePage();
@@ -82,14 +82,14 @@ public class AdminRightsTest extends BaseTest {
         List<Map<String, String>> afterDelete = new BasePage(driver).parseTable();
         Assert.assertFalse(new BasePage(driver).checkParseData(beforeDelete, afterDelete));
     }
-    @Test
+    @Test(invocationCount = 5, priority = 1)
     public void createNewPizza() {
         new HomePage(driver).clickToBodyButtonPizzas();
         new PizzaPage(driver).clickOnCreateNewPizza();
         String newNamePizza = new CreateNewPizzaPage(driver).pizzaName();
         new CreateNewPizzaPage(driver).createNewPizza(
                 newNamePizza,
-                "Family",
+                new CreateNewPizzaPage(driver).pizzaSize(),
                 new GenerateRandomData().generateIngredients(),
                 new CreateNewPizzaPage(driver).pizzaPrice()
         );

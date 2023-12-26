@@ -16,7 +16,7 @@ public class ApiTest extends ApiTestHelpers {
                 .body("it.size()", equalTo(PIZZAS_AMOUNT))
                 .extract();
     }
-    @Test
+    @Test(invocationCount = 10)
     public void getPizzaByIdParamTest() {
         Response getPizzaId = (Response) given(requestSpecification)
                 .get("api/pizzas");
@@ -38,13 +38,15 @@ public class ApiTest extends ApiTestHelpers {
                 .spec(responseSpecification)
                 .body("it.size()", equalTo(CAFES_AMOUNT))
                 .extract();
+
     }
-    @Test
+
+    @Test(invocationCount = 10)
     public void getCafeByIdParamTest() {
         Response getCafeId = (Response) given(requestSpecification)
                 .get("api/cafes");
 
-        int id = (int) getCafeId.jsonPath().getList("id").get(generateRandomId(PIZZAS_AMOUNT) - 1);
+        int id = (int) getCafeId.jsonPath().getList("id").get(generateRandomId(CAFES_AMOUNT) - 1);
 
         Response response = (Response) given(requestSpecification)
                 .get("api/cafes/{id}", id)
