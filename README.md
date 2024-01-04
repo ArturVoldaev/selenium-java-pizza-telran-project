@@ -41,11 +41,22 @@ Run tests with specific browser. Chrome and Edge browsers are availiable as an o
 mvn test -Dbrowser=firefox 
 ```
 
+## How to serve report after tests?
+
+1.You can generate a report using one of the following command:
+```bash
+mvn allure:report
+```
+
+2.Report will be generated into temp folder. Web server with results will start.
+```bash
+mvn allure:serve
+```
+
 ## Configuration
+
 Customize the project settings and test configurations by modifying the files in the `src/main/resources` directory.
 
-## Reporting
-Test results are generated in HTML format and can be found in the target/surefire-reports directory after running the tests.
-
 ## Contributing
+
 Contributions, bug reports, and feature requests are welcome! Feel free to open issues and submit pull requests to improve this project.
