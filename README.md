@@ -35,6 +35,12 @@ Execute the automated tests using Maven with the following command:
 mvn test
 ```
 
+Run tests with specific browser. Chrome and Edge browsers are availiable as an option (chrome or edge). 
+
+```bash
+mvn test -Dbrowser=firefox 
+```
+
 ## Configuration
 Customize the project settings and test configurations by modifying the files in the `src/main/resources` directory.
 
