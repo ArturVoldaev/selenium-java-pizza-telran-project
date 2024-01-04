@@ -3,7 +3,7 @@ package com.pizza.telran.ui.tests;
 import com.pizza.telran.data.BaseConstants;
 import com.pizza.telran.pages.BasePage;
 import com.pizza.telran.pages.HomePage;
-import com.pizza.telran.pages.LogInPage;
+import com.pizza.telran.pages.LoginPage;
 import org.testng.Assert;
 
 import org.testng.annotations.Test;
@@ -25,7 +25,7 @@ public class HomePageTest extends BaseTest {
     public void headerRedirectToLoginPage() {
         new HomePage(driver).clickToHeaderButtonLogInPage();
         Assert.assertEquals(new BasePage(driver).getCurrentUrl(), BaseConstants.BASE_URL + BaseConstants.LOGIN_PAGE_URL);
-        Assert.assertEquals(new LogInPage(driver).getLogInPageTitle(), BaseConstants.LOGIN_PAGE_TITLE);
+        Assert.assertEquals(new LoginPage(driver).getLoginPageTitle(), BaseConstants.LOGIN_PAGE_TITLE);
     }
 
     @Test

@@ -15,7 +15,7 @@ public class AdminRightsTest extends BaseTest {
     @BeforeMethod
     public void prepare() {
         new HomePage(driver).clickToHeaderButtonLogInPage();
-        new LogInPage(driver).logInWithBaseAdminAccess();
+        new LoginPage(driver).loginWithBaseAdminAccess();
     }
 
     @Test(invocationCount = 5, priority = 1)
