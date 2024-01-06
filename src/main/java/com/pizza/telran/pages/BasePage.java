@@ -30,6 +30,16 @@ public class BasePage {
     WebElement createNewButton;
     @FindBy(xpath = "//button[normalize-space()='Submit']")
     WebElement submitButton;
+    @FindBy(id = "cafe_button")
+    public
+    WebElement cafeButton;
+    @FindBy(id = "menu_button")
+    public
+    WebElement menuButton;
+
+    @FindBy(id = "edit_button")
+    public
+    WebElement editButton;
 
     public WebElement getErrorElement() {
         return error;
@@ -128,5 +138,13 @@ public class BasePage {
 
     public int generateRandomNumberOfActionButton() {
         return new GenerateRandomData().generateRandomNumberInRange(1, parseTable().size());
+    }
+
+    public Boolean isElementExistOnPage(WebElement webElement) {
+        if (driver.findElements(By.id(webElement.getAttribute("id"))).size() != 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

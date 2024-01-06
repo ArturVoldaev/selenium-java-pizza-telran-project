@@ -16,4 +16,5 @@ public class PizzaPage extends BasePage {
         clickOnElement(new BasePage(driver).createNewButton);
         return this;
     }
+
 }
