@@ -36,10 +36,6 @@ public class BaseTests {
             System.out.println("edge");
             EdgeOptions options = new EdgeOptions();
             driver = new EventFiringWebDriver(new EdgeDriver(options.addArguments("--headless")));
-        } else if (browser.contains("firefox")) {
-            System.out.println("firefoxParam");
-            EdgeOptions options = new EdgeOptions();
-            driver = new EventFiringWebDriver(new EdgeDriver(options.addArguments("--headless")));
         } else {
             System.out.println("firefox");
             FirefoxOptions options = new FirefoxOptions();

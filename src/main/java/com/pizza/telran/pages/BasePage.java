@@ -26,8 +26,10 @@ public class BasePage {
     List<WebElement> ceil;
     @FindBy(xpath = " //div[@class='error']")
     WebElement error;
-    @FindBy(xpath = "//button[normalize-space()='New']")
+    @FindBy(id="new_button")
     WebElement createNewButton;
+    @FindBy(xpath="//button[normalize-space()='New']")
+    WebElement createNewPizzaButton;
     @FindBy(xpath = "//button[normalize-space()='Submit']")
     WebElement submitButton;
     @FindBy(id = "cafe_button")
