@@ -53,6 +53,12 @@ mvn allure:report
 mvn allure:serve
 ```
 
+## Test Cases
+The Test cases are hold on this [link](https://docs.google.com/spreadsheets/d/1PkvqTf8GQZ8JwaInG-lv_mVugR7i5nDd/edit?usp=sharing&ouid=109249197436436788411&rtpof=true&sd=true)
+
+## Bug Reports
+The bug reports are hold on this [link](https://docs.google.com/spreadsheets/d/14K9v5ff9GZGnVQt63JmJySNuo5f7vcGj/edit?usp=sharing&ouid=109249197436436788411&rtpof=true&sd=true)
+
 ## Configuration
 
 Customize the project settings and test configurations by modifying the files in the `src/main/resources` directory.
