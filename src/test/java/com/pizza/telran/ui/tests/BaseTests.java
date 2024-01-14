@@ -29,15 +29,12 @@ public class BaseTests {
     @BeforeMethod
     public void setUp() {
         if (browser.contains("chrome")) {
-            System.out.println("chrome");
             ChromeOptions options = new ChromeOptions();
             driver = new EventFiringWebDriver(new ChromeDriver(options.addArguments("--headless")));
         } else if (browser.contains("edge")) {
-            System.out.println("edge");
             EdgeOptions options = new EdgeOptions();
             driver = new EventFiringWebDriver(new EdgeDriver(options.addArguments("--headless")));
         } else {
-            System.out.println("firefox");
             FirefoxOptions options = new FirefoxOptions();
             driver = new EventFiringWebDriver(new FirefoxDriver(options.addArguments("--headless")));
         }
